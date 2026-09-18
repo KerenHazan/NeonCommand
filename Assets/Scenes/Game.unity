@@ -255,6 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 210416094}
   - component: {fileID: 210416095}
+  - component: {fileID: 210416096}
   m_Layer: 0
   m_Name: City_1
   m_TagString: Untagged
@@ -336,6 +337,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &210416096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210416093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfa79f85e9d224290cf94b48ebe393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::City
 --- !u!1 &773837719
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773837720}
   - component: {fileID: 773837721}
+  - component: {fileID: 773837722}
   m_Layer: 0
   m_Name: City_2
   m_TagString: Untagged
@@ -427,6 +441,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &773837722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773837719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfa79f85e9d224290cf94b48ebe393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::City
 --- !u!1 &998131608
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,6 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 998131609}
   - component: {fileID: 998131610}
+  - component: {fileID: 998131611}
   m_Layer: 0
   m_Name: City_3
   m_TagString: Untagged
@@ -518,6 +545,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &998131611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998131608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfa79f85e9d224290cf94b48ebe393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::City
 --- !u!1 &1189105631
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +704,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216929650}
   - component: {fileID: 1216929651}
+  - component: {fileID: 1216929652}
   m_Layer: 0
   m_Name: City_4
   m_TagString: Untagged
@@ -746,6 +786,18 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1216929652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216929649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5cfa79f85e9d224290cf94b48ebe393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::City
 --- !u!1 &1664632472
 GameObject:
   m_ObjectHideFlags: 0
