@@ -16,6 +16,15 @@ public class Explosion : MonoBehaviour
         StartCoroutine(ExplosionSequence());
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        EnemyMissile missile = other.GetComponent<EnemyMissile>();
+        if (missile != null)
+        {
+            missile.DestroyMissile();
+        }
+    }
+
     private IEnumerator ExplosionSequence()
     {
         float elapsed = 0f;

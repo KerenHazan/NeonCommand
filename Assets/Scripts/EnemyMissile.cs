@@ -5,6 +5,16 @@ public class EnemyMissile : MonoBehaviour
     [SerializeField] private float movementSpeed = 2.5f;
     [SerializeField] private City target;
 
+    public void DestroyMissile()
+    {
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
+        gameObject.SetActive(false);
+    }
+
     private void Update()
     {
         if (target == null || !target.IsAlive)
