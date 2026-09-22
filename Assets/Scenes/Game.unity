@@ -164,6 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 175446106}
   - component: {fileID: 175446107}
+  - component: {fileID: 175446108}
   m_Layer: 0
   m_Name: PlayerBattery
   m_TagString: Untagged
@@ -245,6 +246,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &175446108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175446105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f697f1f6c85c5f04ea4513672cb87716, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLauncher
+  mainCamera: {fileID: 1189105634}
+  playerBattery: {fileID: 175446106}
+  interceptor: {fileID: 1130304790}
+  minimumTargetY: -2.5
 --- !u!1 &210416093
 GameObject:
   m_ObjectHideFlags: 0
