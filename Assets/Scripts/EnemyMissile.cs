@@ -3,7 +3,14 @@ using UnityEngine;
 public class EnemyMissile : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 2.5f;
-    [SerializeField] private City target;
+    private City target;
+
+    public void Launch(City targetCity, Vector3 startPosition)
+    {
+        target = targetCity;
+        transform.position = startPosition;
+        gameObject.SetActive(true);
+    }
 
     public void DestroyMissile()
     {
