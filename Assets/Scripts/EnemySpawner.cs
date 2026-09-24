@@ -7,6 +7,33 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyMissile enemyMissilePrefab;
     [SerializeField] private City[] cities;
 
+    private readonly HashSet<EnemyMissile> activeMissiles = new HashSet<EnemyMissile>();
+
+    public int ActiveMissileCount => activeMissiles.Count;
+
+    public bool HasLivingCities()
+    {
+        if (cities == null)
+        {
+            return false;
+        }
+
+        foreach (City city in cities)
+        {
+            if (city != null && city.IsAlive)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void NotifyMissileResolved(EnemyMissile missile)
+    {
+        activeMissiles.Remove(missile);
+    }
+
     public void SpawnMissile()
     {
         if (mainCamera == null || enemyMissilePrefab == null || cities == null)
@@ -34,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
         spawnPosition.z = 0f;
 
         EnemyMissile missile = Instantiate(enemyMissilePrefab);
-        missile.Launch(targetCity, spawnPosition);
+        activeMissiles.Add(missile);
+        missile.Launch(targetCity, spawnPosition, this);
     }
 }

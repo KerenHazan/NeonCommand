@@ -4,19 +4,29 @@ public class EnemyMissile : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 2.5f;
     private City target;
+    private EnemySpawner spawner;
+    private bool isResolved;
 
-    public void Launch(City targetCity, Vector3 startPosition)
+    public void Launch(City targetCity, Vector3 startPosition, EnemySpawner enemySpawner)
     {
         target = targetCity;
+        spawner = enemySpawner;
+        isResolved = false;
         transform.position = startPosition;
         gameObject.SetActive(true);
     }
 
     public void DestroyMissile()
     {
-        if (!gameObject.activeSelf)
+        if (isResolved)
         {
             return;
+        }
+
+        isResolved = true;
+        if (spawner != null)
+        {
+            spawner.NotifyMissileResolved(this);
         }
 
         gameObject.SetActive(false);
@@ -26,7 +36,7 @@ public class EnemyMissile : MonoBehaviour
     {
         if (target == null || !target.IsAlive)
         {
-            gameObject.SetActive(false);
+            DestroyMissile();
             return;
         }
 
@@ -38,7 +48,7 @@ public class EnemyMissile : MonoBehaviour
         if (transform.position == target.transform.position)
         {
             target.DestroyCity();
-            gameObject.SetActive(false);
+            DestroyMissile();
         }
     }
 }
