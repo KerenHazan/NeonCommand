@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class WaveController : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private EnemySpawner enemySpawner;
     [SerializeField] private int startingMissilesPerWave = 5;
     [SerializeField] private float spawnInterval = 1.0f;
@@ -13,21 +14,22 @@ public class WaveController : MonoBehaviour
 
     private IEnumerator Start()
     {
-        if (enemySpawner == null)
+        if (enemySpawner == null || gameManager == null)
         {
-            Debug.LogError("WaveController requires an EnemySpawner reference.", this);
+            Debug.LogError("WaveController requires EnemySpawner and GameManager references.", this);
             yield break;
         }
 
-        while (enemySpawner.HasLivingCities())
+        while (!gameManager.IsGameOver && enemySpawner.HasLivingCities())
         {
             CurrentWave++;
+            gameManager.BeginWave(CurrentWave);
             IsWaveRunning = true;
             int missilesThisWave = startingMissilesPerWave + (CurrentWave - 1);
 
             for (int i = 0; i < missilesThisWave; i++)
             {
-                if (!enemySpawner.HasLivingCities())
+                if (gameManager.IsGameOver || !enemySpawner.HasLivingCities())
                 {
                     IsWaveRunning = false;
                     yield break;
@@ -42,7 +44,7 @@ public class WaveController : MonoBehaviour
 
             while (enemySpawner.ActiveMissileCount > 0)
             {
-                if (!enemySpawner.HasLivingCities())
+                if (gameManager.IsGameOver || !enemySpawner.HasLivingCities())
                 {
                     IsWaveRunning = false;
                     yield break;
@@ -52,7 +54,7 @@ public class WaveController : MonoBehaviour
             }
 
             IsWaveRunning = false;
-            if (!enemySpawner.HasLivingCities())
+            if (gameManager.IsGameOver || !enemySpawner.HasLivingCities())
             {
                 yield break;
             }

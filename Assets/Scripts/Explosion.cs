@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private float maxRadius = 1.8f;
     [SerializeField] private float expandDuration = 0.25f;
     [SerializeField] private float holdDuration = 0.2f;
@@ -19,9 +20,12 @@ public class Explosion : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         EnemyMissile missile = other.GetComponent<EnemyMissile>();
-        if (missile != null)
+        if (missile != null && missile.DestroyMissile())
         {
-            missile.DestroyMissile();
+            if (gameManager != null)
+            {
+                gameManager.AddMissileDestroyedScore();
+            }
         }
     }
 

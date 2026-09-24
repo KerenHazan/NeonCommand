@@ -16,11 +16,11 @@ public class EnemyMissile : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void DestroyMissile()
+    public bool DestroyMissile()
     {
-        if (isResolved)
+        if (isResolved || !gameObject.activeInHierarchy)
         {
-            return;
+            return false;
         }
 
         isResolved = true;
@@ -30,6 +30,7 @@ public class EnemyMissile : MonoBehaviour
         }
 
         gameObject.SetActive(false);
+        return true;
     }
 
     private void Update()

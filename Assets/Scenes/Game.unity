@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f697f1f6c85c5f04ea4513672cb87716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLauncher
+  gameManager: {fileID: 332413840}
   mainCamera: {fileID: 1189105634}
   playerBattery: {fileID: 175446106}
   interceptor: {fileID: 1130304790}
@@ -417,6 +418,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &332413839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332413841}
+  - component: {fileID: 332413840}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &332413840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332413839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da9072f89fa2ce4c94be0da1e8fdcd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  cities:
+  - {fileID: 1216929652}
+  - {fileID: 773837722}
+  - {fileID: 210416096}
+  - {fileID: 998131611}
+  startingAmmoPerWave: 10
+  scorePerMissile: 100
+--- !u!4 &332413841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332413839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &657761070
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf734573781ed5439e479c30c079ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Explosion
+  gameManager: {fileID: 332413840}
   maxRadius: 1.8
   expandDuration: 0.25
   holdDuration: 0.2
@@ -635,6 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11f13041e1c8e74fa7c3fb83232c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveController
+  gameManager: {fileID: 332413840}
   enemySpawner: {fileID: 280760995}
   startingMissilesPerWave: 5
   spawnInterval: 1
@@ -1356,3 +1410,4 @@ SceneRoots:
   - {fileID: 1882937144}
   - {fileID: 280760996}
   - {fileID: 800627750}
+  - {fileID: 332413841}

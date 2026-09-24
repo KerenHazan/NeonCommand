@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerLauncher : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform playerBattery;
     [SerializeField] private Interceptor interceptor;
@@ -25,7 +26,7 @@ public class PlayerLauncher : MonoBehaviour
 
     private void LaunchAtScreenPosition(Vector2 screenPosition)
     {
-        if (mainCamera == null || playerBattery == null || interceptor == null ||
+        if (gameManager == null || mainCamera == null || playerBattery == null || interceptor == null ||
             interceptor.gameObject.activeSelf)
         {
             return;
@@ -41,6 +42,11 @@ public class PlayerLauncher : MonoBehaviour
         worldPosition.z = 0f;
 
         if (worldPosition.y <= minimumTargetY)
+        {
+            return;
+        }
+
+        if (!gameManager.TryUseAmmo())
         {
             return;
         }
