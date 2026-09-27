@@ -12,21 +12,45 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private TMP_Text finalScoreText;
     [SerializeField] private Button restartButton;
+    [SerializeField] private GameObject hud;
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject waveIntroPanel;
+    [SerializeField] private GameObject waveClearPanel;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private TMP_Text waveIntroText;
+    [SerializeField] private TMP_Text waveClearText;
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button pauseRestartButton;
+    [SerializeField] private Button pauseMenuButton;
+    [SerializeField] private Button gameOverMenuButton;
 
     private int lastScore = -1;
     private int lastAmmo = -1;
     private int lastWave = -1;
-    private bool gameOverShown;
+    private GameState? lastState;
 
     private void Awake()
     {
-        gameOverPanel.SetActive(false);
         restartButton.onClick.AddListener(gameManager.RestartGame);
+        playButton.onClick.AddListener(gameManager.StartGame);
+        pauseButton.onClick.AddListener(gameManager.TogglePause);
+        resumeButton.onClick.AddListener(gameManager.ResumeGame);
+        pauseRestartButton.onClick.AddListener(gameManager.RestartGame);
+        pauseMenuButton.onClick.AddListener(gameManager.ReturnToMainMenu);
+        gameOverMenuButton.onClick.AddListener(gameManager.ReturnToMainMenu);
     }
 
     private void OnDestroy()
     {
-        restartButton.onClick.RemoveListener(gameManager.RestartGame);
+        if (restartButton != null) restartButton.onClick.RemoveListener(gameManager.RestartGame);
+        if (playButton != null) playButton.onClick.RemoveListener(gameManager.StartGame);
+        if (pauseButton != null) pauseButton.onClick.RemoveListener(gameManager.TogglePause);
+        if (resumeButton != null) resumeButton.onClick.RemoveListener(gameManager.ResumeGame);
+        if (pauseRestartButton != null) pauseRestartButton.onClick.RemoveListener(gameManager.RestartGame);
+        if (pauseMenuButton != null) pauseMenuButton.onClick.RemoveListener(gameManager.ReturnToMainMenu);
+        if (gameOverMenuButton != null) gameOverMenuButton.onClick.RemoveListener(gameManager.ReturnToMainMenu);
     }
 
     private void Update()
@@ -35,7 +59,7 @@ public class GameUI : MonoBehaviour
         {
             lastScore = gameManager.Score;
             scoreText.text = $"Score: {lastScore}";
-            if (gameOverShown)
+            if (gameManager.IsGameOver)
             {
                 finalScoreText.text = $"Final Score: {lastScore}";
             }
@@ -51,13 +75,25 @@ public class GameUI : MonoBehaviour
         {
             lastWave = waveController.CurrentWave;
             waveText.text = $"Wave: {lastWave}";
+            waveIntroText.text = $"WAVE {Mathf.Max(1, lastWave)}";
+            waveClearText.text = $"WAVE {lastWave} CLEAR";
         }
 
-        if (!gameOverShown && gameManager.IsGameOver)
+        if (lastState != gameManager.CurrentState)
         {
-            gameOverShown = true;
-            finalScoreText.text = $"Final Score: {gameManager.Score}";
-            gameOverPanel.SetActive(true);
+            lastState = gameManager.CurrentState;
+            mainMenuPanel.SetActive(lastState == GameState.MainMenu);
+            waveIntroPanel.SetActive(lastState == GameState.WaveIntro);
+            waveClearPanel.SetActive(lastState == GameState.WaveClear);
+            pausePanel.SetActive(lastState == GameState.Paused);
+            gameOverPanel.SetActive(lastState == GameState.GameOver);
+            hud.SetActive(lastState != GameState.MainMenu);
+            pauseButton.interactable = lastState == GameState.Playing ||
+                lastState == GameState.WaveIntro || lastState == GameState.WaveClear;
+            if (lastState == GameState.GameOver)
+            {
+                finalScoreText.text = $"Final Score: {gameManager.Score}";
+            }
         }
     }
 }

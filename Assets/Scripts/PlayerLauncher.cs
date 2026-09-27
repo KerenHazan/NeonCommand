@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerLauncher : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class PlayerLauncher : MonoBehaviour
     [SerializeField] private Transform playerBattery;
     [SerializeField] private Interceptor interceptor;
     [SerializeField] private float minimumTargetY = -2.5f;
+    private readonly List<RaycastResult> uiHits = new List<RaycastResult>();
 
     private void Update()
     {
@@ -26,13 +30,13 @@ public class PlayerLauncher : MonoBehaviour
 
     private void LaunchAtScreenPosition(Vector2 screenPosition)
     {
-        if (gameManager == null || mainCamera == null || playerBattery == null || interceptor == null ||
+        if (gameManager == null || !gameManager.CanFire || mainCamera == null || playerBattery == null || interceptor == null ||
             interceptor.gameObject.activeSelf)
         {
             return;
         }
 
-        if (!mainCamera.pixelRect.Contains(screenPosition))
+        if (!mainCamera.pixelRect.Contains(screenPosition) || IsOverUI(screenPosition))
         {
             return;
         }
@@ -53,5 +57,27 @@ public class PlayerLauncher : MonoBehaviour
 
         interceptor.transform.position = playerBattery.position;
         interceptor.Launch(worldPosition);
+    }
+
+    private bool IsOverUI(Vector2 screenPosition)
+    {
+        if (EventSystem.current == null)
+        {
+            return false;
+        }
+
+        // Raycast this press's position, avoiding stale pointer state in Update.
+        var pointer = new PointerEventData(EventSystem.current) { position = screenPosition };
+        uiHits.Clear();
+        EventSystem.current.RaycastAll(pointer, uiHits);
+        foreach (RaycastResult hit in uiHits)
+        {
+            if (hit.module is GraphicRaycaster)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
