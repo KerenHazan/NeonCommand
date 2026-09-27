@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public int RemainingAmmo { get; private set; }
     public bool IsGameOver { get; private set; }
 
+    private void Awake()
+    {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+    }
+
     private void Update()
     {
         CheckGameOver();
