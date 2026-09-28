@@ -26,6 +26,10 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Button pauseMenuButton;
     [SerializeField] private Button gameOverMenuButton;
 
+    [SerializeField] private TMP_Text mainMenuBestScoreText;
+    [SerializeField] private TMP_Text gameOverBestScoreText;
+
+    private int lastBestScore = -1;
     private int lastScore = -1;
     private int lastAmmo = -1;
     private int lastWave = -1;
@@ -55,6 +59,13 @@ public class GameUI : MonoBehaviour
 
     private void Update()
     {
+        if (lastBestScore != gameManager.BestScore)
+        {
+            lastBestScore = gameManager.BestScore;
+            mainMenuBestScoreText.text = $"Best Score: {lastBestScore}";
+            gameOverBestScoreText.text = $"Best Score: {lastBestScore}";
+        }
+
         if (lastScore != gameManager.Score)
         {
             lastScore = gameManager.Score;
@@ -87,6 +98,10 @@ public class GameUI : MonoBehaviour
             waveClearPanel.SetActive(lastState == GameState.WaveClear);
             pausePanel.SetActive(lastState == GameState.Paused);
             gameOverPanel.SetActive(lastState == GameState.GameOver);
+            if (lastState == GameState.WaveClear)
+            {
+                waveClearText.text = $"WAVE {lastWave} CLEAR\nBonus: {gameManager.LastWaveBonus}";
+            }
             hud.SetActive(lastState != GameState.MainMenu);
             pauseButton.interactable = lastState == GameState.Playing ||
                 lastState == GameState.WaveIntro || lastState == GameState.WaveClear;

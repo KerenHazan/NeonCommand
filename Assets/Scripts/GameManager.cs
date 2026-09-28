@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int startingAmmoPerWave = 10;
     [SerializeField] private int scorePerMissile = 100;
 
+    [SerializeField] private int chainBonusPerGeneration = 50;
+    [SerializeField] private int scorePerSurvivingCity = 100;
+    [SerializeField] private int scorePerUnusedShot = 10;
+    private const string BestScoreKey = "BestScore";
+
+    public int BestScore { get; private set; }
+    public int LastWaveBonus { get; private set; }
     public int Score { get; private set; }
     public int RemainingAmmo { get; private set; }
     public GameState CurrentState { get; private set; } = GameState.MainMenu;
@@ -36,6 +43,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        BestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         Time.timeScale = 1f;
@@ -76,6 +84,13 @@ public class GameManager : MonoBehaviour
     {
         if (CurrentState == GameState.Playing)
         {
+            int livingCities = 0;
+            foreach (City city in cities)
+            {
+                if (city != null && city.IsAlive) livingCities++;
+            }
+            LastWaveBonus = livingCities * scorePerSurvivingCity + RemainingAmmo * scorePerUnusedShot;
+            Score += LastWaveBonus;
             SetState(GameState.WaveClear);
         }
     }
@@ -130,11 +145,20 @@ public class GameManager : MonoBehaviour
         }
 
         SetState(GameState.GameOver);
+        if (Score > BestScore)
+        {
+            BestScore = Score;
+            PlayerPrefs.SetInt(BestScoreKey, BestScore);
+            PlayerPrefs.Save();
+        }
     }
 
-    public void AddMissileDestroyedScore()
+    public void AddMissileDestroyedScore(int chainGeneration = 0)
     {
-        Score += scorePerMissile;
+        if (CurrentState == GameState.Playing)
+        {
+            Score += scorePerMissile + Mathf.Max(0, chainGeneration) * chainBonusPerGeneration;
+        }
     }
 
     public bool TryUseAmmo()

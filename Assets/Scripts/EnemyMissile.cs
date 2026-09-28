@@ -13,6 +13,14 @@ public class EnemyMissile : MonoBehaviour
         spawner = enemySpawner;
         isResolved = false;
         transform.position = startPosition;
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<Collider2D>().enabled = true;
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        body.simulated = true;
+        body.linearVelocity = Vector2.zero;
+        body.angularVelocity = 0f;
+        body.position = startPosition;
+        body.rotation = 0f;
         gameObject.SetActive(true);
     }
 
@@ -24,12 +32,14 @@ public class EnemyMissile : MonoBehaviour
         }
 
         isResolved = true;
-        if (spawner != null)
-        {
-            spawner.NotifyMissileResolved(this);
-        }
-
+        EnemySpawner owner = spawner;
+        target = null;
+        spawner = null;
         gameObject.SetActive(false);
+        if (owner != null)
+        {
+            owner.NotifyMissileResolved(this);
+        }
         return true;
     }
 
