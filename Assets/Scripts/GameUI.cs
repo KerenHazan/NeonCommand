@@ -97,6 +97,7 @@ public class GameUI : MonoBehaviour
             waveIntroPanel.SetActive(lastState == GameState.WaveIntro);
             waveClearPanel.SetActive(lastState == GameState.WaveClear);
             pausePanel.SetActive(lastState == GameState.Paused);
+            pauseButton.gameObject.SetActive(lastState != GameState.Paused);
             gameOverPanel.SetActive(lastState == GameState.GameOver);
             if (lastState == GameState.WaveClear)
             {
