@@ -25,7 +25,7 @@ Direct interceptions award **100 points**. Each chain generation adds **50**, gi
 - Enemy missile pooling, reusable explosions and a reusable interceptor.
 - Responsive PC/Android HUD and menus with Android safe-area support.
 - Main Menu, wave transitions, pause/resume, restart and Game Over flow.
-- Simple neon-inspired shapes and a 60 FPS target.
+- Original neon city silhouettes, launcher/projectile artwork, star field, skyline depth and ring-based explosions.
 
 See [the Game Design Document](Docs/GDD.md) for exact rules, architecture and future polish. Audio and advanced visual effects are not part of the current MVP.
 

@@ -33,7 +33,7 @@ Neon Command is an arcade defense game inspired by Missile Command. Defend four 
 - **Not taking:** original Atari artwork, sounds, exact levels, multiple batteries or multiplayer.
 - **Secondary inspiration:** *Missile Command: Recharged* for its modern arcade presentation. Power-ups and large progression systems are outside this MVP.
 
-The implemented visuals are simple Unity shapes. Trails, detailed silhouettes, particles and enhanced glow remain future polish.
+The implemented visuals use original lightweight Unity-ready sprites: illuminated city silhouettes, a defensive battery, distinct projectiles, neon explosion rings, a star field and a distant skyline. Trails, particles and audio remain future polish.
 
 ---
 
@@ -154,11 +154,11 @@ The MVP uses simple, high-contrast shapes on a dark blue/black background.
 | Enemy missiles | Small bright pink sprites | Unity built-in shapes |
 | Interceptor | Simple contrasting sprite | Unity built-in shape |
 | Explosions | Expanding cyan circular visual and matching trigger area | Unity shape |
-| Cities / battery | Four cyan city placeholders and a central battery shape | Unity built-in shapes |
+| Cities / battery | Four cyan illuminated city silhouettes and a central launcher battery | Original project artwork |
 | UI | TextMeshPro text, simple colored buttons and dark panels | Unity UI and TextMeshPro Essential Resources |
 | Sound effects / music | Not implemented | No gameplay audio assets added |
 
-Missile trails, particles, detailed art, animated bonus feedback, screen shake and enhanced neon glow are future polish. Explosion growth and city disappearance provide the current visual feedback; explosions disable after holding rather than fading out.
+Missile trails, particles, animated bonus feedback, screen shake and audio are future polish. The current artwork provides neon silhouettes, distinct projectiles, a star field, skyline depth and ring-based explosion feedback; explosions disable after holding rather than fading out.
 
 No original Missile Command graphics or sounds are used. Any future third-party art or audio needs its source and licence recorded when added.
 
@@ -238,7 +238,7 @@ Repository settings and code establish platform support; they do not certify tha
 
 ### 8.2 Future polish — not implemented
 
-- Missile trails, more detailed city silhouettes, explosion particles and enhanced glow.
+- Missile trails, explosion particles, animated bonus feedback, screen shake and enhanced glow.
 - Screen shake and animated chain-bonus feedback.
 - Launch, explosion and city-hit sounds; optional background music.
 - An additional enemy missile type.
