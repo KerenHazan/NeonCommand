@@ -151,9 +151,9 @@ The MVP uses simple, high-contrast shapes on a dark blue/black background.
 
 | Asset | Implemented presentation | Source |
 |---|---|---|
-| Enemy missiles | Small bright pink sprites | Unity built-in shapes |
-| Interceptor | Simple contrasting sprite | Unity built-in shape |
-| Explosions | Expanding cyan circular visual and matching trigger area | Unity shape |
+| Enemy missiles | Small bright pink projectile sprites | Original project artwork |
+| Interceptor | Bright green defensive projectile sprite | Original project artwork |
+| Explosions | Expanding cyan neon ring visual and matching trigger area | Original project artwork |
 | Cities / battery | Four cyan illuminated city silhouettes and a central launcher battery | Original project artwork |
 | UI | TextMeshPro text, simple colored buttons and dark panels | Unity UI and TextMeshPro Essential Resources |
 | Sound effects / music | Not implemented | No gameplay audio assets added |
